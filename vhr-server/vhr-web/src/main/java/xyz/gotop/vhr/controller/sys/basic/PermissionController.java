@@ -84,14 +84,9 @@ public class PermissionController {
     @Transactional(rollbackFor = Exception.class)
     @PutMapping("menus/{rid}")
     public RespBean updateMidsOfRole(@PathVariable Integer rid, @RequestBody Integer[] mids) {
-        try {
-            menuRoleService.deleteByRid(rid);
-            if (mids.length > 0) {
-                menuRoleService.addMenuRoles(rid, mids);
-            }
-        } catch (Exception e) {
-            logger.error("「角色权限」更新失败", e);
-            return RespBean.error("「角色权限」更新失败");
+        menuRoleService.deleteByRid(rid);
+        if (mids.length > 0) {
+            menuRoleService.addMenuRoles(rid, mids);
         }
         return RespBean.ok("更新成功");
     }

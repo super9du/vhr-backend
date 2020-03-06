@@ -78,13 +78,8 @@ public class HrService implements UserDetailsService {
 
     @Transactional(rollbackFor = Exception.class)
     public boolean updateRolesOfHr(Integer hrId, Integer[] rids) {
-        try {
-            deleteAllRolesFromHr(hrId);
-            addRolesToHr(hrId, rids);
-        } catch (Exception e) {
-            logger.error("更新 HR 角色异常", e);
-            return false;
-        }
+        deleteAllRolesFromHr(hrId);
+        addRolesToHr(hrId, rids);
         return true;
     }
 
